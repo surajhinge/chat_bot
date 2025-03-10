@@ -1,0 +1,64 @@
+python manage.py makemigrations chatbot
+python manage.py migrate
+python manage.py runserver
+
+cd django_project
+source venv/bin/activate
+cd backend
+
+sudo systemctl start vastyam.service
+sudo systemctl status vastyam.service
+(venv) ubuntu@ip-172-31-30-47:~/django_project/gruham/backend$ sudo systemctl stop vastyam.service
+(venv) ubuntu@ip-172-31-30-47:~/django_project/gruham/backend$ sudo systemctl stop nginx
+(venv) ubuntu@ip-172-31-30-47:~/django_project/gruham/backend$ sudo systemctl start vastyam.service
+(venv) ubuntu@ip-172-31-30-47:~/django_project/gruham/backend$ sudo systemctl status vastyam.service
+ sudo systemctl start nginx
+
+Original gunicorn
+(venv) ubuntu@ip-172-31-30-47:~/django_project/backend$ cat /etc/systemd/system/vastyam.service
+[Unit]
+Description=Django Web Application Server using Gunicorn
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/django_project/gruham/backend
+ExecStart=/bin/bash -c 'source /home/ubuntu/django_project/venv/bin/activate; gunicorn --workers 3 --bind 0.0.0.0:8000 backend.wsgi:application --timeout 180'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl stop vastyam.service
+
+sudo nano /etc/systemd/system/vastyam.service
+
+Modified gunicorn
+
+[Unit]
+Description=Django Web Application Server using Gunicorn
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/django_project/backend/backend
+ExecStart=/bin/bash -c 'source /home/ubuntu/django_project/venv/bin/activate; gunicorn --workers 3 --bind 0.0.0.0:8000 backend.wsgi:application --timeout 180'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl start vastyam.service
+sudo systemctl daemon-reload
+
+python manage.py shell
+
+from chatbot.models import Question
+Question.objects.create(question="How to Add Two Numbers in Python – Easy Programs", answer="You can add two numbers using the '+' operator. Example:\n\n```python\na = 5\nb = 3\nsum = a + b\nprint(sum)\n```")
+Question.objects.create(question="Python program to interchange first and last elements in a list", answer="Use list indexing to swap the first and last elements:\n\n```python\ndef swap_first_last(lst):\n    lst[0], lst[-1] = lst[-1], lst[0]\n    return lst\nprint(swap_first_last([1, 2, 3, 4]))\n```")
+Question.objects.create(question="Python – Extract Unique values dictionary values", answer="You can use set comprehension:\n\n```python\ndict_values = {'a': [1, 2], 'b': [2, 3], 'c': [3, 4]}\nunique_values = set(val for values in dict_values.values() for val in values)\nprint(unique_values)\n```")
+
+CREATE SCHEMA `chatbot_db` ;
+USE chatbot_db;

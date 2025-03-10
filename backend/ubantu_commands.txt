@@ -1,0 +1,144 @@
+df -h
+
+installed Git, python
+
+cd django_project
+source venv/bin/activate
+cd gruham/backend
+
+python manage.py runserver 0.0.0.0:8000
+
+"D:\website\aws\my-key.pem"
+
+ssh-keygen -t rsa -b 4096 -C "surajhinge07@gmail.com"
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Suraj@30';
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'Suraj@30';
+FLUSH PRIVILEGES;
+
+CREATE SCHEMA `gruham` ;
+
+nslookup http://server.vastyam.com/
+aws ec2 describe-instances --instance-ids 54.163.59.59 --query 'Reservations[*].Instances[*].[PublicIpAddress]' --output text
+
+sudo systemctl daemon-reload
+sudo systemctl stop vastyam.service
+sudo systemctl status vastyam.service
+
+
+sudo cp -r /etc/nginx /home/ubuntu/django_project/gruham
+
+sudo cp -r /home/ubuntu/django_project/gruham/letsencrypt /home/ubuntu/django_project
+
+sudo mv /home/ubuntu/django_project/nginx /home/ubuntu/django_project/gruham
+
+gunicorn aistudio.wsgi:application --keyfile /home/subhadeep/Desktop/openssl/host.key --certfile /home/subhadeep/Desktop/openssl/host.cert
+
+
+
+
+sudo snap install --classic certbot
+
+
+
+
+
+
+
+
+
+
+Subhadeep Dash
+9:29 PM
+gunicorn aistudio.wsgi:application --keyfile /home/subhadeep/Desktop/openssl/host.key --certfile /home/subhadeep/Desktop/openssl/host.cert
+Subhadeep Dash
+9:39 PM
+location ^~ / {
+        root /var/www/html;
+                try_files $uri $uri/ /index.html =404;
+    }
+location /api {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_pass http://localhost:8000;
+    }
+Subhadeep Dash
+9:42 PM
+https://certbot.eff.org/instructions?ws=nginx&os=snap
+Subhadeep Dash
+9:44 PM
+"proxy": "http://localhost:4000",
+Subhadeep Dash
+10:03 PM
+sudo netstat -tulpn | grep -E '80|443'
+Subhadeep Dash
+10:06 PM
+sudo mkdir -p /var/www/html/.well-known/acme-challenge
+echo "test" | sudo tee /var/www/html/.well-known/acme-challenge/testfile
+Subhadeep Dash
+10:12 PM
+http://54.163.59.59/.well-known/acme-challenge/testfile
+Subhadeep Dash
+10:20 PM
+http://server.vastyam.com/.well-known/acme-challenge/testfile
+iyf-rnvf-sww
+
+
+https://dnyani.com/
+https://dnyani.com/
+
+
+Chatbot commands
+
+cd django_project
+source venv/bin/activate
+cd backend
+sudo systemctl status nginx
+sudo systemctl status vastyam.service
+sudo systemctl stop nginx
+sudo systemctl stop vastyam.service
+sudo systemctl disable vastyam.service
+
+sudo nano /etc/systemd/system/vastyam.service
+
+make the changes
+
+[Unit]
+Description=Django Web Application Server using Gunicorn
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/django_project/backend/backend
+ExecStart=/bin/bash -c 'source /home/ubuntu/django_project/venv/bin/activate; gunicorn --workers 3 --bind 0.0.0.0:8000 backend.wsgi:application --timeout 180'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl daemon-reload
+sudo systemctl start vastyam.service
+sudo systemctl enable vastyam.service
+sudo systemctl status vastyam.service
+sudo systemctl start nginx
+sudo lsof -i :8000
+/home/ubuntu/django_project/backend
+ps aux | grep gunicorn
+
+python manage.py shell
+
+from chatbot.models import Question
+Question.objects.create(question="How to Add Two Numbers in Python – Easy Programs", answer="You can add two numbers using the '+' operator. Example:\n\n```python\na = 5\nb = 3\nsum = a + b\nprint(sum)\n```")
+Question.objects.create(question="Python program to interchange first and last elements in a list", answer="Use list indexing to swap the first and last elements:\n\n```python\ndef swap_first_last(lst):\n    lst[0], lst[-1] = lst[-1], lst[0]\n    return lst\nprint(swap_first_last([1, 2, 3, 4]))\n```")
+Question.objects.create(question="Python – Extract Unique values dictionary values", answer="You can use set comprehension:\n\n```python\ndict_values = {'a': [1, 2], 'b': [2, 3], 'c': [3, 4]}\nunique_values = set(val for values in dict_values.values() for val in values)\nprint(unique_values)\n```")
+
+
+npm start
+scp -i "D:\website\aws\server_vastyam.pem" -r "build" ubuntu@54.163.59.59:/home/ubuntu/chatbot
+sudo systemctl stop nginx
+cd /home/ubuntu/chatbot/build
+sudo cp -R build/* /var/www/html/
+sudo systemctl start nginx
+
